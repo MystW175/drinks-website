@@ -12,9 +12,9 @@ async function addProduct(formData: FormData) {
     "use server";
     const session = await getServerSession(authOptions);
 
-    // if(!session){
-    //     redirect("/api/auth/signin?callbackUrl=/addProducts");
-    // }
+    if(!session){
+        redirect("/api/auth/signin?callbackUrl=/addProducts");
+    }
 
     const name = formData.get('name')?.toString();
     const description = formData.get('description')?.toString();
