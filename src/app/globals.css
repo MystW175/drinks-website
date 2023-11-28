@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+h1              { font-size: 2em;}
+h3              { font-size: 1.17em;}
+h5              { font-size: .83em;}
+h6              { font-size: .75em;}
+h1, h2, h3, h4,
+h5, h6          { font-weight: bolder }
+h2{
+    font-size: 18px;
+}
+
+input::placeholder {
+    font-size: 14px;
+  }
+textarea::placeholder{
+    font-size: 14px;
+}
+
+.styledPlaceholder{
+    @apply focus:placeholder:text-[10px] focus:placeholder:transition-all focus:placeholder:absolute focus:placeholder:top-0;
+}
+
+
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main{
+    flex: 1 1;
+}
