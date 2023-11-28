@@ -29,7 +29,7 @@ export default async function CartPage() {
                   <div className="card-body items-center w-full sm:w-auto gap-3">                    
                     <div className="flex justify-between w-full">
                       <p className="text-xl"> Cart Total:</p>
-                      <p className="text-right text-xl">{formatPrice(70 + (cart?.subtotal || 0))}</p>
+                      <p className="text-right text-xl">{formatPrice(cart?.subtotal || 0)}</p>
                     </div>
                     <button className="btn w-full min-w-[16rem] md:btn-wide btn-accent normal-case">Check Out</button>
                   </div>
