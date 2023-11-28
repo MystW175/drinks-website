@@ -8,10 +8,9 @@ function classNames(...classes: string[]) {
 }
 const navigation = [
     { name: 'All Products', href: '/allProducts', },
-    { name: 'Drinks', href: '/drinks',},
-    { name: 'Accessories', href: '/accessories', },
+    { name: 'Drinks', href: '/search?query=Beverage',},
+    { name: 'Accessories', href: '/search?query=Accessories', },
 ]
-
 export default function MobileNavLinks() {
     const pathname = usePathname();
     return (
