@@ -10,12 +10,21 @@ export const metadata = {
 export default async function CartPage() {
   const cart = await getCart();
 
+  if(!cart || cart.items.length == 0){
+    return( 
+    <div className="flex pt-6 sm:py-6 justify-around items-center md:items-end">
+      <div>
+        <h3 className="text-center text-xl mx-6">Your Cart</h3> 
+        <div className="h-48"><p className=" text-center my-2">Cart is empty. Browse and add items</p></div>
+      </div>
+    </div>);
+  }
+
       return (
         <div className="pt-6 sm:py-6">
           <div className="flex flex-wrap-reverse gap-5 justify-around items-center md:items-end">
               <div>
-                <h3 className={!cart?.items.length ? 'text-center text-xl mx-6' : 'text-xl mx-6'}>Your Cart</h3> 
-                {!cart?.items.length  && <div className="h-48"><p className="text-right my-2">Cart is empty. Browse and add items</p></div>}
+                <h3 className="text-xl mx-6">Your Cart</h3> 
                 <div className="grid grid-cols-1 gap-4 items-start m-4">
                     {cart?.items.map(cartItem => (
                       <CartEntry cartItem={cartItem} key={cartItem.id} setProductQuantity={setProductQuantity}/>
