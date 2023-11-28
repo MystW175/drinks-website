@@ -11,7 +11,6 @@ const navigation = [
     { name: 'Drinks', href: '/search?query=Beverage',},
     { name: 'Accessories', href: '/search?query=Accessories', },
 ]
-
 export default function MobileNavLinks() {
     const pathname = usePathname();
     return (

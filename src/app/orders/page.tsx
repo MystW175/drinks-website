@@ -12,6 +12,7 @@ export default async function OrderPage(){
             <h2 className="px-8 py-2">Your Orders</h2>
             <p className="px-4">Note This is just for placeholder. Actual order list is yet to be made.</p>
             <div className="grid grid-cols-1 lg:grid-cols-3 mx-4 w-max gap-4">
+ 
             </div>
             <h2 className="px-8 py-2">Order History</h2>
         </div>
