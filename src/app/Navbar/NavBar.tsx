@@ -24,7 +24,7 @@ export default async function NavBar() {
   const session = await getServerSession(authOptions);
 
   return (
-    <div className="navbar flex px-4 justify-between text-primary-content sticky top-0 bg-white z-20">
+    <div className="navbar flex pr-4 sm:px-4 justify-between text-primary-content sticky top-0 bg-white z-20">
       
       <div className="">
 
