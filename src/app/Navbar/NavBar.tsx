@@ -6,8 +6,7 @@ import { getCart } from "@/lib/db/cart";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/utils/authOptions";
 import NavLinks from "./Navlinks";
-import MobileNavLinks from "./MobileNavLinks";
-import SearchBox from "./SearchBox";
+import MobileNav from "./MobileNav";
 
 async function searchProducts(formData: FormData) {
   "use server";
@@ -28,11 +27,10 @@ export default async function NavBar() {
       
       <div className="">
 
-        <MobileNavLinks/>
+        <MobileNav/>
 
         <Link href="/" className="font-bond sm:text-xl sm:ml-3 whitespace-nowrap">Condensed Fluids</Link>
         <NavLinks />
-        <SearchBox/>
       </div>
 
       <div className="flex-none gap-2">
