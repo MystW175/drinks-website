@@ -17,7 +17,7 @@ const navigation = [
 export default function MobileNav() {
     const [open, setOpen] = useState(false)
 
-    const handleSubmit = (event) => {
+    const handleSubmit = (event: any) => {
         event.preventDefault();
         const formData = new FormData(event.target);
         searchProducts(formData);
