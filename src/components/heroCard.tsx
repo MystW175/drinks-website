@@ -10,7 +10,7 @@ interface HeroProps{
 
 export default async function Hero({name, imageUrl, desc, productId}: HeroProps) {
     return (
-        <div className="hero md:max-w-full max-w-[400px] md:w-[90%]" style={{backgroundImage: `url(${imageUrl})`}}>
+        <div className="hero w-full md:max-w-full sm:max-w-[400px] md:w-[90%]" style={{backgroundImage: `url(${imageUrl})`}}>
             
             <div className="hero-overlay bg-opacity-60 sm:bg-green-300"></div>
             <div className="hero-content flex-col md:flex-row text-white sm:text-black">
