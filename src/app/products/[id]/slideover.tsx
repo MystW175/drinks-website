@@ -17,7 +17,7 @@ export default function SlideOver({isOpen}: SlideOverProps) {
 
   return (
     <Transition.Root show={open} as={Fragment}>
-      <Dialog as="div" className="relative z-10 " onClose={setOpen}>
+      <Dialog as="div" className="relative z-40 " onClose={setOpen}>
         <Transition.Child
           as={Fragment}
           enter="ease-in-out duration-500"
@@ -52,7 +52,7 @@ export default function SlideOver({isOpen}: SlideOverProps) {
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0"
                   >
-                    <div className="absolute right-1 top-3 flex pr-2 pt-4 sm:-ml-10 sm:pr-4">
+                    <div className="absolute right-2 top-3 flex pr-2 pt-4 z-50 -ml-10 sm:pr-4">
                       <button
                         type="button"
                         className="relative rounded-md text-black hover:text-gray-400 focus:outline-none "
