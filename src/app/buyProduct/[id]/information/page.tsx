@@ -4,6 +4,9 @@ import { cache } from "react";
 import OrderSummary from "@/components/orderSummary";
 import BreadCrumb from "@/components/breadCrumb";
 import { redirect } from "next/navigation";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/utils/authOptions";
+import FormSubmitButton from "@/components/formSubmit";
 
 interface ProductPageProps {
     params: {
@@ -11,8 +14,44 @@ interface ProductPageProps {
     },
 }
 
+const states=[
+    { name:  "Andhra Pradesh", value: "1" },
+    { name: "Arunachal Pradesh", value: "2" },
+    { name: "Assam", value: "3" },
+    { name: "Bihar", value: "4" },
+    { name: "Chhattisgarh", value: "5" },
+    { name: "Goa", value: "6" },
+    { name: "Gujarat", value: "7" },
+    { name: "Haryana", value: "8" },
+    { name: "Himachal Pradesh", value: "9" },
+    { name: "Jharkhand", value: "10" },
+    { name: "Karnataka", value: "11" },
+    { name: "Kerala", value: "12" },
+    { name: "Madhya Pradesh", value: "13" },
+    { name: "Maharashtra", value: "14" },
+    { name: "Manipur", value: "15" },
+    { name: "Meghalaya", value: "16" },
+    { name: "Mizoram", value: "17" },
+    { name: "Nagaland", value: "18" },
+    { name: "Odisha", value: "19" },
+    { name: "Punjab", value: "20" },
+    { name: "Rajasthan", value: "21" },
+    { name: "Sikkim", value: "22" },
+    { name: "Tamil Nadu", value: "23" },
+    { name: "Telangana", value: "24" },
+    { name: "Tripura", value: "25" },
+    { name: "Uttar Pradesh", value: "26" },
+    { name: "Uttarakhand", value: "27" },
+    { name: "West Bengal", value: "28" },
+]
+
 async function addInfo(formData: FormData) {
     "use server";
+    const session = await getServerSession(authOptions);
+
+    if(!session){
+        redirect("/api/auth/signin?callbackUrl=/");
+    }
 
     const email = formData.get('email')?.toString();
     const address = formData.get('address')?.toString();
@@ -23,9 +62,9 @@ async function addInfo(formData: FormData) {
     const apartment = formData.get('apartment')?.toString();
 
 
-    // if(!email || !address || !state || !pincode || !firstname || !lastname || !apartment){
-    //     throw Error('Missing required fields');
-    // }
+    if(!email || !address || !state || !pincode || !firstname || !lastname || !apartment){
+        throw Error('Missing required fields');
+    }
 
     redirect("./payment");
 }
@@ -51,7 +90,7 @@ export default async function BuyProduct({ params: { id } }: ProductPageProps) {
 
                 <div className="p-2 w-full md:w-[50vw]">
                     <label className="label font-bold">Contact</label>
-                    <input name="email" type="text" id="email" placeholder="Email or phone number" className="w-full md:max-w-lg input input-bordered" />
+                    <input required name="email" type="text" id="email" placeholder="Email or phone number" className="w-full md:max-w-lg input input-bordered" />
 
                     <div className="m-2">
                         <label className="flex items-center gap-3 cursor-pointer">
@@ -62,24 +101,22 @@ export default async function BuyProduct({ params: { id } }: ProductPageProps) {
 
                     <label className="label font-bold">Shipping Address</label>
                     <div className="flex flex-col sm:flex-row gap-2 mb-2 md:max-w-lg">
-                        <select name= "state" defaultValue="State" className="select select-bordered w-full sm:w-[50%] ">
+                        <select required name= "state" defaultValue="State" className="select select-bordered w-full sm:w-[50%] ">
                             <option disabled>State</option>
-                            <option>Homer</option>
-                            <option>Marge</option>
-                            <option>Bart</option>
-                            <option>Lisa</option>
-                            <option>Maggie</option>
+                            {states.map((state)=>(
+                                <option key={state.name} value={state.value}>{state.name}</option>
+                            ))}
                         </select>
-                        <input  name="pincode" type="text" placeholder="Pincode" className="w-full sm:w-[50%] input input-bordered" />
+                        <input required name="pincode" type="text" placeholder="Pincode" className="w-full sm:w-[50%] input input-bordered" />
                         
                     </div>
                     <div className="flex flex-col sm:flex-row w-full md:max-w-lg gap-2">
-                        <input name="firstname" type="text" placeholder="First Name" className="mb-2 w-full sm:w-[50%] input input-bordered" />
-                        <input name="lastname" type="text" placeholder="Last Name" className="mb-2 w-full sm:w-[50%] input input-bordered" />
+                        <input required name="firstname" type="text" placeholder="First Name" className="mb-2 w-full sm:w-[50%] input input-bordered" />
+                        <input required name="lastname" type="text" placeholder="Last Name" className="mb-2 w-full sm:w-[50%] input input-bordered" />
                     </div>
-                    <input name="address" id="address" type="text" placeholder="Address" className="mb-2 w-full md:max-w-lg input input-bordered" />
-                    <input name="apartment" type="text" placeholder="Apartment/Block" className="mb-2 w-full md:max-w-lg input input-bordered" />
-                    <input name="landmark" type="text" placeholder="Notable Landmarks(optional)" className="mb-2 w-full md:max-w-lg input input-bordered" />
+                    <input required name="address" id="address" type="text" placeholder="Address" className="mb-2 w-full md:max-w-lg input input-bordered" />
+                    <input required name="apartment" type="text" placeholder="Apartment/Block" className="mb-2 w-full md:max-w-lg input input-bordered" />
+                    <input  name="landmark" type="text" placeholder="Notable Landmarks(optional)" className="mb-2 w-full md:max-w-lg input input-bordered" />
 
                     <div className="m-2 mb-4">
                         <label className="flex items-center gap-3 cursor-pointer">
@@ -88,7 +125,7 @@ export default async function BuyProduct({ params: { id } }: ProductPageProps) {
                         </label>
                     </div>
                     <div className="flex justify-center md:justify-normal">
-                        <button type="submit" className="btn md:btn-wide w-full max-w-lg btn-accent normal-case">Continue to Shipping</button>
+                        <FormSubmitButton className="normal-case w-full md:btn-wide"> Continue to shipping</FormSubmitButton>
                     </div>
                 </div>
 
