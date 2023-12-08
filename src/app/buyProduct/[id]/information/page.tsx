@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/db/prisma";
-import { notFound } from "next/navigation";
+import { notFound} from "next/navigation";
 import { cache } from "react";
 import OrderSummary from "@/components/orderSummary";
 import BreadCrumb from "@/components/breadCrumb";
@@ -45,13 +45,13 @@ const states=[
     { name: "West Bengal", value: "28" },
 ]
 
-async function addInfo(formData: FormData) {
+async function AddInfo(formData: FormData) {
     "use server";
     const session = await getServerSession(authOptions);
 
-    if(!session){
-        redirect("/api/auth/signin?callbackUrl=/");
-    }
+    // if(!session){
+    //     redirect("/signin?callbackUrl=/");
+    // }
 
     const email = formData.get('email')?.toString();
     const address = formData.get('address')?.toString();
@@ -60,13 +60,16 @@ async function addInfo(formData: FormData) {
     const firstname = formData.get('firstname')?.toString();
     const lastname = formData.get('lastname')?.toString();
     const apartment = formData.get('apartment')?.toString();
+    const id = formData.get('productId')?.toString();
+    const sendEmail = formData.get('sendEmail');
+    const saveInfo = formData.get('saveInfo');
 
 
     if(!email || !address || !state || !pincode || !firstname || !lastname || !apartment){
         throw Error('Missing required fields');
     }
 
-    redirect("./payment");
+    redirect(`../${id}/payment`);
 }
 
 const getProduct = cache(async (id: string) => {
@@ -86,7 +89,7 @@ export default async function BuyProduct({ params: { id } }: ProductPageProps) {
             <div className="flex flex-col md:flex-row gap-4 justify-evenly">
                 <OrderSummary product={product} quantity={quantity}/>
 
-                <form action={addInfo}>
+                <form action={AddInfo}>
 
                 <div className="p-2 w-full md:w-[50vw]">
                     <label className="label font-bold">Contact</label>
@@ -94,7 +97,7 @@ export default async function BuyProduct({ params: { id } }: ProductPageProps) {
 
                     <div className="m-2">
                         <label className="flex items-center gap-3 cursor-pointer">
-                            <input type="checkbox" className="checkbox checkbox-sm checkbox-success" />
+                            <input type="checkbox" name="sendEmail" className="checkbox checkbox-sm checkbox-success" />
                             <span className="label-text">Email me with news and offers</span>
                         </label>
                     </div>
@@ -102,7 +105,7 @@ export default async function BuyProduct({ params: { id } }: ProductPageProps) {
                     <label className="label font-bold">Shipping Address</label>
                     <div className="flex flex-col sm:flex-row gap-2 mb-2 md:max-w-lg">
                         <select required name= "state" defaultValue="State" className="select select-bordered w-full sm:w-[50%] ">
-                            <option disabled>State</option>
+                            <option value="" disabled>State</option>
                             {states.map((state)=>(
                                 <option key={state.name} value={state.value}>{state.name}</option>
                             ))}
@@ -120,10 +123,11 @@ export default async function BuyProduct({ params: { id } }: ProductPageProps) {
 
                     <div className="m-2 mb-4">
                         <label className="flex items-center gap-3 cursor-pointer">
-                            <input type="checkbox" className="checkbox checkbox-sm checkbox-success" />
+                            <input type="checkbox"  name="saveInfo" className="checkbox checkbox-sm checkbox-success" />
                             <span className="label-text">Save this information</span>
                         </label>
                     </div>
+                    <input type="hidden" name="productId" value={id}></input>
                     <div className="flex justify-center md:justify-normal">
                         <FormSubmitButton className="normal-case w-full md:btn-wide"> Continue to shipping</FormSubmitButton>
                     </div>
