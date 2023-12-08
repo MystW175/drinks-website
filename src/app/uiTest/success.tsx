@@ -23,7 +23,7 @@ export default function SuccessMessage({isOpen, callback, message}: SuccessMessa
     return (
 
             <div className={show}>
-            <div className="fixed z-10 top-0 right-0 w-full sm:max-w-lg p-2 justify-end ">
+            <div className="fixed z-40 top-0 right-0 w-full sm:max-w-lg p-2 justify-end ">
             <div className="transform overflow-hidden rounded-lg text-left shadow-xl transition-all my-8 w-full">
                 <div className="bg-green-100 p-6 ">
                     <div className="flex items-center justify-between">

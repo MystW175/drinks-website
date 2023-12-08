@@ -42,7 +42,7 @@ export default function AddressModal() {
             
             <div className={open ? '' : 'transition-opacity hidden'}>
 
-                <div className="card relative z-10">
+                <div className="card relative z-40">
                     <div className="fixed inset-0 bg-gray-500 bg-opacity-20 transition-opacity" />
 
                     <div className="fixed inset-0 z-10 overflow-y-auto">
