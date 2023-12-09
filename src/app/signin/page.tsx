@@ -1,21 +1,17 @@
 "use client";
-
-import { redirect } from "next/navigation";
 import Link from "next/link";
-import { useState, useTransition } from "react";
+import { useTransition } from "react";
 import { signIn } from "next-auth/react";
 
 export default function SignInPage() {
     const [isPending, startTransition] = useTransition();
       
         const formSubmit = async (formData: FormData ) => {  
-          startTransition(async () => {
-              signIn('google', {
+              signIn('credentials', {
                 email: formData.get('email'),
                 password: formData.get('password'),
                 callbackUrl : '/',
-              })
-        })
+              });
         };
 
         const googleSignIn = () => {
