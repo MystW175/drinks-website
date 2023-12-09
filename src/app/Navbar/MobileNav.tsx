@@ -64,7 +64,7 @@ export default function MobileNav() {
                                         leaveFrom="opacity-100"
                                         leaveTo="opacity-0"
                                     >
-                                        <div className="absolute right-0 top-0 -ml-8 flex pr-2 pt-4 sm:-ml-10 sm:pr-4">
+                                        <div className="absolute right-0 top-0 -ml-8 flex pt-4 sm:-ml-10 pr-4">
                                             <button
                                                 type="button"
                                                 className="relative rounded-md hover:text-gray-400 focus:outline-none focus:border-none"
