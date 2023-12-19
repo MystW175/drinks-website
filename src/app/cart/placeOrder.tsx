@@ -2,11 +2,13 @@
 
 import { useState, useTransition } from "react";
 import { create_Order } from "./actions";
+import OrderConfirmation from "./orderConfirmation";
 
 export default function PlaceOrderButton(){
     const [isPending, startTransition] = useTransition();
     const [success, setSuccess] = useState(false);
     return(
+        <>
         <button onClick={() => {
             setSuccess(false);
             startTransition(async () => {
@@ -17,5 +19,7 @@ export default function PlaceOrderButton(){
             {!isPending && "Check Out"}
             {isPending && <span className="loading loading-spinner loading-md"></span>}
         </button>
+        <OrderConfirmation isOpen={!isPending && success }/>
+        </>
     );
 }

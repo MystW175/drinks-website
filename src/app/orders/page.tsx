@@ -24,7 +24,7 @@ export default async function OrderPage() {
         );
 
     return (
-        <div className="mx-3 sm:mx-8">
+        <div className="mx-3 sm:mx-8 2xl:max-w-[1300px] 2xl:mx-auto">
             <h3 className="text-lg font-medium  pt-3">Orders</h3>
             <p className="text-gray-700 pb-3 text-sm  ">Your orders and order history are shown here.</p>
             {orders.map(order => (

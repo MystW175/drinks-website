@@ -18,7 +18,7 @@ export default async function OrderItem({ order }: OrderItemProps) {
     const total_cost = shipping_cost + subtotal;
 
     return (
-        <div className="my-6">
+        <div className="my-6 mb-10">
             <div className="mx-auto max-w-[600px] lg:max-w-full lg:w-full">
 
                 {/* order header */}
@@ -77,13 +77,7 @@ export default async function OrderItem({ order }: OrderItemProps) {
 
                         <div className="card-body gap-6 px-4 sm:p-8">
                             <h4 className="font-medium text-[15px]">Preparing to ship on <span>Dec 21, 2023</span></h4>
-                            <ProgressBar />
-                            <ul className="hidden sm:flex justify-between w-full">
-                                <li className="font-medium text-[15px] text-secondary">Order placed</li>
-                                <li className="font-medium text-[15px]">Processing</li>
-                                <li className="font-medium text-[15px]">Shipped</li>
-                                <li className="font-medium text-[15px]">Delivered</li>
-                            </ul>
+                            <ProgressBar progress={order.orderDate}/>
                         </div>
 
                     </div>
