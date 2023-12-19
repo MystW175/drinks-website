@@ -1,6 +1,7 @@
 "use server";
 
 import { createCart, getCart } from "@/lib/db/cart";
+import { createOrder } from "@/lib/db/order";
 import { prisma } from "@/lib/db/prisma";
 import { revalidatePath } from "next/cache";
 
@@ -26,3 +27,4 @@ export async function incProductQuantity(productId: string) {
     }
     revalidatePath("/products/[id]");
 }
+

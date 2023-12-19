@@ -2,6 +2,9 @@ import { formatPrice } from "@/lib/format";
 import CartEntry from "./cartEntry";
 import { getCart } from "@/lib/db/cart";
 import { setProductQuantity } from "./actions";
+import { createOrder } from "@/lib/db/order";
+import { prisma } from "@/lib/db/prisma";
+import PlaceOrderButton from "./placeOrder";
 
 export const metadata = {
   title:"Your Cart",
@@ -40,7 +43,7 @@ export default async function CartPage() {
                       <p className="text-xl"> Cart Total:</p>
                       <p className="text-right text-xl">{formatPrice(cart?.subtotal || 0)}</p>
                     </div>
-                    <button className="btn w-full min-w-[16rem] md:btn-wide btn-accent normal-case">Check Out</button>
+                    <PlaceOrderButton/>
                   </div>
                 </div>
               </div>    

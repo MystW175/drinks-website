@@ -11,6 +11,7 @@ export default function SignInPage() {
                 email: formData.get('email'),
                 password: formData.get('password'),
                 callbackUrl : '/',
+                
               });
         };
 
@@ -36,6 +37,7 @@ export default function SignInPage() {
               >
                 Continue with Google
               </button>
+              <div className="divider before:bg-gray-400 after:bg-gray-400 before:h-[.5px] after:h-[.5px] my-1">or</div>
           <form className="space-y-6" action={formSubmit}>
             <div>
               <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">

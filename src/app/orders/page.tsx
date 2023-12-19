@@ -1,20 +1,35 @@
-import OrderSummary from "@/components/orderSummary";
-import ProductCard from "@/components/productCard";
+import { getCart } from "@/lib/db/cart";
 import { prisma } from "@/lib/db/prisma";
+import { formatPrice } from "@/lib/format";
+import Image from "next/image";
+import Link from "next/link";
+import ProgressBar from "./progress";
+import OrderItem from "./orderItem";
+import { getOrder } from "@/lib/db/order";
 
-export default async function OrderPage(){
-    const products = await prisma.product.findMany({
-        orderBy: { id: "desc"}
-    });
-    return(
-        <div className="">
-            <h3 className="text-lg bg-gray-100 px-8 py-3">Orders</h3>
-            <h2 className="px-8 py-2">Your Orders</h2>
-            <p className="px-4">Note This is just for placeholder. Actual order list is yet to be made.</p>
-            <div className="grid grid-cols-1 lg:grid-cols-3 mx-4 w-max gap-4">
- 
-            </div>
-            <h2 className="px-8 py-2">Order History</h2>
+export default async function OrderPage() {
+    const orders = await prisma.order.findMany({
+        orderBy: {orderDate: "desc"},
+        include: { items: { include: { product: true } } },
+      })
+
+    if (orders.length == 0)
+        return (
+        <div  className="mx-8">
+            <h3 className="text-lg font-medium  pt-3">Orders</h3>
+            <p className="text-gray-700 pb-3 text-sm  ">Your orders and order history are shown here.</p>
+            <div className="border-t-[1px] my-3"></div>
+            <h4 className="font-medium">You currently have zero orders</h4>
+        </div>
+        );
+
+    return (
+        <div className="mx-3 sm:mx-8">
+            <h3 className="text-lg font-medium  pt-3">Orders</h3>
+            <p className="text-gray-700 pb-3 text-sm  ">Your orders and order history are shown here.</p>
+            {orders.map(order => (
+            <OrderItem order={order} key={order.id}/>
+            ))}
         </div>
     );
 }

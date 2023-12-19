@@ -11,10 +11,10 @@ export default async function ProfilePage() {
     const user = session?.user;
 
     return (
-        <div className="my-5 px-3 sm:px-8 max-w-[800px]">
+        <div className="my-5 px-3 sm:px-8 max-w-[800px] mx-auto">
             
-            <h3 className="text-lg font-medium  pt-3">Profile</h3>
-            <p className="text-gray-700 pb-3 text-sm">Your account details are shown here. You can edit your account details.</p>
+            <h3 className="text-lg font-medium  pt-3 ">Profile</h3>
+            <p className="text-gray-700 pb-3 text-sm  ">Your account details are shown here. You can edit your account details.</p>
             <div className="border-t-[1px] my-3"></div>
             <div className="flex justify-between py-3">
                 <div className="grid grid-cols-1 sm:grid-cols-2 w-[430px]" >

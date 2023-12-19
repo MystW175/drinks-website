@@ -2,30 +2,36 @@ import { mergeAnonymousAndUserCart } from "@/lib/db/cart";
 import { prisma } from "@/lib/db/prisma";
 import { env } from "@/lib/env";
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import { NextAuthOptions } from "next-auth";
+import { NextAuthOptions, getServerSession } from "next-auth";
 import { Adapter } from "next-auth/adapters";
 import GoogleProvider from "next-auth/providers/google"
 import CredentialsProvider from "next-auth/providers/credentials";
 
 export const authOptions: NextAuthOptions = {
     adapter: PrismaAdapter(prisma) as Adapter,
-    
+
     providers: [
         CredentialsProvider({
             name: "credentials",
             credentials: {
-              email: { label: "Email", type:"email", placeholder:"jsmith@example.com" },
-              password: { label: "Password", type: "password" }
+              email: {},
+              password: {}
             },
             async authorize(credentials, req) {
-              const user = await prisma.user.findUnique({
-                where: { email: credentials?.email},
-              })
-              if (user) {
+
+              console.log({credentials});
+              const user = await prisma.user.findFirst({
+                where: { email: credentials?.email }
+              });
+              console.log({user});
+
+              if(user)
+              {
+                console.log('User returned')
                 return user;
-              } else {
-                return null;
               }
+              else 
+              return null;
             }
           }),
         GoogleProvider({
@@ -35,6 +41,7 @@ export const authOptions: NextAuthOptions = {
     ],
     callbacks: {
         session({session, user}){
+            console.log('Session generated')
             session.user.id = user.id;
             return session;
         },

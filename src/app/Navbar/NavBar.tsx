@@ -36,7 +36,7 @@ export default async function NavBar() {
       <div className="flex-none gap-2">
       <form action={searchProducts} className="hidden md:block">
           <div className="form-control">
-            <input name="searchQuery" placeholder="Search" className="input h-10 input-bordered rounded-xl pl-5 p-2 w-56 sm:w-80 text-sm" />
+            <input name="searchQuery" placeholder="Search" className="input h-10 input-bordered rounded-xl pl-5 p-2 w-56 sm:w-72 text-sm" />
           </div>
         </form>
 

@@ -1,6 +1,5 @@
 "use client";
 
-import SlideOver from "@/app/uiTest/slideovertext";
 import { useState, useTransition } from "react";
 import PopUp from "./slideover";
 

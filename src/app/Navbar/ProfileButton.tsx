@@ -56,7 +56,7 @@ export default function ProfileButton({session}: ProfileButtonProps) {
                 </ul>
             </div> 
             :
-            <Link className="normal-case btn btn-outline" href='/signin'>Sign In</Link>
+            <Link className="normal-case hover:text-secondary transition-all px-1 active:text-gray-700" href='/signin'>Sign In</Link>
             }
         </div>
     );
