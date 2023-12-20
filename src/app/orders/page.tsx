@@ -1,11 +1,5 @@
-import { getCart } from "@/lib/db/cart";
 import { prisma } from "@/lib/db/prisma";
-import { formatPrice } from "@/lib/format";
-import Image from "next/image";
-import Link from "next/link";
-import ProgressBar from "./progress";
 import OrderItem from "./orderItem";
-import { getOrder } from "@/lib/db/order";
 
 export default async function OrderPage() {
     const orders = await prisma.order.findMany({
