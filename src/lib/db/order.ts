@@ -18,25 +18,7 @@ export type OrderList = OrderWithProducts & {
     subtotal: number;
 }
 
-export async function getOrder(): Promise<OrderList | null> {
-    const session = await getServerSession(authOptions);
 
-    let order: OrderWithProducts | null = null;
-
-    order = await prisma.order.findFirst({
-        where: { userId: session?.user.id },
-        include: { items: { include: { product: true } } },
-    });
-
-    if (!order) {
-        return null;
-    }
-
-    return {
-        ...order,
-        subtotal: order.items.reduce((acc, item) => acc + item.quantity * item.product.price, 0)
-    }
-}
 export async function createOrder(): Promise<OrderList> {
     const session = await getServerSession(authOptions);
 
