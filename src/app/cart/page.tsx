@@ -2,8 +2,6 @@ import { formatPrice } from "@/lib/format";
 import CartEntry from "./cartEntry";
 import { getCart } from "@/lib/db/cart";
 import { setProductQuantity } from "./actions";
-import { createOrder } from "@/lib/db/order";
-import { prisma } from "@/lib/db/prisma";
 import PlaceOrderButton from "./placeOrder";
 
 export const metadata = {
