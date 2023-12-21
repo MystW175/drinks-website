@@ -76,7 +76,7 @@ export default async function OrderItem({ order }: OrderItemProps) {
                         <div className="border-b-[1px]"></div>
 
                         <div className="card-body gap-6 px-4 sm:p-8">
-                            <h4 className="font-medium text-[15px]">Preparing to ship on <span>Dec 21, 2023</span></h4>
+                            
                             <ProgressBar progress={order.orderDate}/>
                         </div>
 
