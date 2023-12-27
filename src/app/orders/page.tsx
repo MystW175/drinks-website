@@ -1,8 +1,13 @@
 import { prisma } from "@/lib/db/prisma";
 import OrderItem from "./orderItem";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../utils/authOptions";
 
 export default async function OrderPage() {
+    const session = await getServerSession(authOptions);
+
     const orders = await prisma.order.findMany({
+        where: { userId: session?.user.id },
         orderBy: {orderDate: "desc"},
         include: { items: { include: { product: true } } },
       })
